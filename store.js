@@ -4,7 +4,7 @@ import { randomUUID } from 'node:crypto';
 
 export class ValidationError extends Error {}
 
-const LIMITS = { title: 80, name: 50, items: 40, points: 100_000 };
+const LIMITS = { title: 80, name: 50, role: 500, items: 40, points: 100_000 };
 const HEX_COLOR = /^#[0-9a-f]{6}$/i;
 
 const newId = () => randomUUID().slice(0, 8);
@@ -19,7 +19,7 @@ function seed() {
   ].map(([name, color]) => ({ id: newId(), name, color }));
 
   const games = ['Estafet balon', 'Kursi musik', 'Tarik tambang', 'Lempar bola', 'Estafet air'].map(
-    (name) => ({ id: newId(), name }),
+    (name) => ({ id: newId(), name, role: '' }),
   );
 
   return {
@@ -41,6 +41,14 @@ function cleanText(value, label, max) {
   const text = value.trim().replace(/\s+/g, ' ');
   if (!text) throw new ValidationError(`${label} tidak boleh kosong.`);
   if (text.length > max) throw new ValidationError(`${label} maksimal ${max} karakter.`);
+  return text;
+}
+
+function cleanOptionalText(value, label, max) {
+  if (value == null) return '';
+  if (typeof value !== 'string') throw new ValidationError(label + ' harus berupa teks.');
+  const text = value.trim().replace(/\s+/g, ' ');
+  if (text.length > max) throw new ValidationError(label + ' maksimal ' + max + ' karakter.');
   return text;
 }
 
@@ -112,7 +120,9 @@ const actions = {
   },
 
   saveGames(state, { games }) {
-    state.games = mergeNamed(state.games, games, 'game');
+    state.games = mergeNamed(state.games, games, 'game', (item, name) => ({
+      role: cleanOptionalText(item?.role, 'Role / Aturan untuk "' + name + '"', LIMITS.role),
+    }));
     const keep = new Set(state.games.map((g) => g.id));
     for (const gameId of Object.keys(state.results)) if (!keep.has(gameId)) delete state.results[gameId];
     if (state.currentGameId && !keep.has(state.currentGameId)) state.currentGameId = null;
