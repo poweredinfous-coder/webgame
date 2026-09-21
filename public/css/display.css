@@ -94,6 +94,20 @@ body.idle {
   overflow-wrap: anywhere;
 }
 
+.game-role {
+  display: block;
+  max-width: min(38rem, 40vw);
+  margin-top: 0.35rem;
+  color: var(--on-accent-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.25;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
 .board-wrap {
   flex: 1;
   min-height: 0;
