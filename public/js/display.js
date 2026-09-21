@@ -6,6 +6,7 @@ const els = {
   subtitle: $('subtitle'),
   game: $('game'),
   gameName: $('game-name'),
+  gameRole: $('game-role'),
   board: $('board'),
   message: $('message'),
   status: $('status'),
@@ -191,7 +192,14 @@ function render(state) {
 
   const game = state.games.find((g) => g.id === state.currentGameId);
   els.game.hidden = !game;
-  if (game) els.gameName.textContent = game.name;
+  if (game) {
+    els.gameName.textContent = game.name;
+    els.gameRole.textContent = game.role || '';
+    els.gameRole.hidden = !game.role;
+  } else {
+    els.gameRole.textContent = '';
+    els.gameRole.hidden = true;
+  }
 
   const revealing = wasHidden === true && !state.hideRanking;
   wasHidden = state.hideRanking;
