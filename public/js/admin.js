@@ -540,7 +540,10 @@ function gameRowHTML(game) {
   return `
     <div class="edit-row game-edit" data-id="${game.id ?? ''}">
       <span class="row-num" aria-hidden="true"></span>
-      <input type="text" name="name" value="${esc(game.name)}" maxlength="50" autocomplete="off" />
+      <div class="game-fields">
+        <input type="text" name="name" value="${esc(game.name)}" maxlength="50" autocomplete="off" />
+        <textarea name="role" maxlength="500" rows="3" placeholder="Role / Aturan Game (opsional)">${esc(game.role ?? '')}</textarea>
+      </div>
       <div class="row-buttons">
         <button type="button" class="btn" data-action="move-up">Naik</button>
         <button type="button" class="btn" data-action="move-down">Turun</button>
@@ -553,7 +556,7 @@ function viewGames() {
   return `
     <form class="panel narrow" id="games-form" data-draft novalidate>
       <h2>Game</h2>
-      <p class="muted">Nama dan urutan game. Urutan ini dipakai di daftar game dan rekap.</p>
+      <p class="muted">Nama, role / aturan, dan urutan game. Role / aturan akan tampil di kartu game pada layar proyektor.</p>
       <div id="game-rows" class="edit-rows">${state.games.map(gameRowHTML).join('')}</div>
       <div class="actions"><button type="button" class="btn" data-action="add-game">Tambah game</button></div>
       ${formFooter('Simpan game')}
@@ -569,6 +572,7 @@ function renumber(container, noun) {
     const name = row.querySelector('[name="name"]');
     name.setAttribute('aria-label', `Nama ${noun} ke-${n}`);
     row.querySelector('[name="color"]')?.setAttribute('aria-label', `Warna ${noun} ke-${n}`);
+    row.querySelector('[name="role"]')?.setAttribute('aria-label', `Role / Aturan ${noun} ke-${n}`);
     row.querySelector('[data-action="remove-row"]').setAttribute('aria-label', `Hapus ${noun} ke-${n}`);
     row.querySelector('[data-action="move-up"]')?.setAttribute('aria-label', `Naikkan ${noun} ke-${n}`);
     row.querySelector('[data-action="move-down"]')?.setAttribute('aria-label', `Turunkan ${noun} ke-${n}`);
@@ -767,6 +771,7 @@ async function onPanelSubmit(event) {
       ...(row.dataset.id ? { id: row.dataset.id } : {}),
       name: row.querySelector('[name="name"]').value,
       ...(isGroups ? { color: row.querySelector('[name="color"]').value } : {}),
+      ...(!isGroups ? { role: row.querySelector('[name="role"]').value } : {}),
     }));
     const list = isGroups ? state.groups : state.games;
     const kept = new Set(items.map((i) => i.id));
