@@ -607,6 +607,33 @@ input[type="color"] {
   width: auto;
 }
 
+.game-edit {
+  align-items: flex-start;
+}
+
+.game-fields {
+  flex: 1 1 22rem;
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+textarea {
+  width: 100%;
+  min-height: 5.25rem;
+  padding: 0.7rem 0.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-control);
+  background: var(--track);
+  color: var(--text);
+  font: 500 1rem/1.35 var(--body);
+  resize: vertical;
+}
+
+textarea::placeholder {
+  color: var(--muted);
+}
+
 .row-num {
   flex: none;
   width: 1.75rem;
