@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "title": "Family Gathering 2026",
+  "groups": [
+    {
+      "id": "5663024e",
+      "name": "MBG (Manusia Butuh Gajian)",
+      "color": "#4c9aff"
+    },
+    {
+      "id": "1ef94e93",
+      "name": "BPJS (Barisan Pekerja Jujur dan Setia)",
+      "color": "#ff6b6b"
+    },
+    {
+      "id": "fc8799b2",
+      "name": "BUMN (Barisan Unyu Menawan Nian)",
+      "color": "#3ddc97"
+    },
+    {
+      "id": "a6c7f83f",
+      "name": "DESIL (Demi es the ikut lomba)",
+      "color": "#b28dff"
+    },
+    {
+      "id": "548d8d8b",
+      "name": "KOPDES (kelompok orang paling Tim Oranye",
+      "color": "#ff9f43"
+    }
+  ],
+  "games": [
+    {
+      "id": "892fd69e",
+      "name": "Estafet balon"
+    },
+    {
+      "id": "d5cd5006",
+      "name": "Kursi musik"
+    },
+    {
+      "id": "fdc30700",
+      "name": "Tarik tambang"
+    },
+    {
+      "id": "69169dc7",
+      "name": "Lempar bola"
+    },
+    {
+      "id": "1d3fc95d",
+      "name": "Estafet air"
+    }
+  ],
+  "placementPoints": [
+    100,
+    80,
+    60,
+    40,
+    20
+  ],
+  "results": {
+    "892fd69e": {
+      "5663024e": {
+        "place": 1,
+        "manual": 0
+      },
+      "1ef94e93": {
+        "place": 2,
+        "manual": 0
+      },
+      "fc8799b2": {
+        "place": 3,
+        "manual": -10
+      },
+      "a6c7f83f": {
+        "place": 4,
+        "manual": 0
+      },
+      "548d8d8b": {
+        "place": 5,
+        "manual": 0
+      }
+    }
+  },
+  "currentGameId": "892fd69e",
+  "hideRanking": false
+}

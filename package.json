@@ -1,0 +1,13 @@
+{
+  "name": "webgame-scoreboard",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Papan skor family gathering: layar proyektor dan halaman admin",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
